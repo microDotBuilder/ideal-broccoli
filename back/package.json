@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -b && node --watch dist/index.js",
-    "find": "ts-node src/db/find.ts",
+    "find": "ts-node src/db/find-query-test.ts",
     "lint": "prettier --write ."
   },
   "keywords": [],

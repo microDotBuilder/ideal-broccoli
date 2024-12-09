@@ -33,8 +33,8 @@ export function generateRandomAvatar() {
   return {
     url: faker.image.avatar(),
     altText: faker.lorem.sentence({
-      min: faker.number.int(3),
-      max: faker.number.int(10),
+      min: faker.number.int(10),
+      max: faker.number.int(30),
     }),
     contentType: "image/jpeg",
   };

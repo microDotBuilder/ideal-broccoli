@@ -11,6 +11,8 @@ const getUser = asyncHandler(async (req, res) => {
     select: {
       id: true,
       name: true,
+      email: true,
+      avatar: true,
     },
     where: {
       email,
