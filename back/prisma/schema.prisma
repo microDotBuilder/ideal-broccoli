@@ -8,17 +8,40 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
+  id       String  @id @default(cuid())
+  email    String  @unique
+  username String  @unique
+  name     String?
+  avatar   Avatar? 
+  role     UserRole   @default(USER)
+  rooms    Room[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model Avatar {
+  id       String  @id @default(cuid())
+  url      String
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId   String  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  altText     String?
+  contentType String
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model Room {
+  id        String         @id @default(cuid())
+  name      String         @unique
+  socketId  String?
+  roomUsers User[]         
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([name])
 }
